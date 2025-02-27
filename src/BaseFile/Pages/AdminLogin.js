@@ -360,7 +360,15 @@ export default function AdminLogin() {
                 Admin Login
                 </h2>
               </div>
-         
+              <Link to="/">
+                <div className="flex items-center justify-center w-28 shadow-lg shadow-blue-600 ">
+                  <img
+                    alt="Earn4u Logo"
+                    src="/Earn4u2"
+                    className="w-auto"
+                  />
+                </div>
+              </Link>
             </div>
 
             <div className="mt-10">

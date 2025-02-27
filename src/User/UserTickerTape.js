@@ -6,14 +6,21 @@ const UserTickerTape = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Clear existing script before adding a new one
+    // Remove any existing script before appending a new one
     containerRef.current.innerHTML = "";
 
     const script = document.createElement("script");
     script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
     script.async = true;
 
-    // Correct way to set JSON data as a string
+    script.onload = () => {
+      console.log("Ticker Tape widget loaded successfully!");
+    };
+
+    script.onerror = (err) => {
+      console.error("Failed to load the Ticker Tape widget", err);
+    };
+
     script.textContent = JSON.stringify({
       symbols: [
         { proName: "FOREXCOM:SPXUSD", title: "S&P 500 Index" },
@@ -32,8 +39,10 @@ const UserTickerTape = () => {
     containerRef.current.appendChild(script);
 
     return () => {
-      // Cleanup existing widgets to prevent duplicates
-      containerRef.current.innerHTML = "";
+      // Ensure cleanup to avoid multiple widget instances
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
+      }
     };
   }, []);
 

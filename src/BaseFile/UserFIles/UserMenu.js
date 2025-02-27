@@ -776,6 +776,12 @@ const navigation = [
     submenu: [],
   },
   {
+    name: "Membership Plan",
+    icon: DocumentChartBarIcon,
+    to: "/user/plan",
+    submenu: [],
+  },
+  {
     name: "Wallet",
     to: "#",
     icon: ScaleIcon,
@@ -785,17 +791,18 @@ const navigation = [
       { name: "Top-Up", icon: ScaleIcon, to: "/user/topup" },
     ],
   },
+
   {
     name: "Income",
     to: "#",
     icon: CreditCardIcon,
     submenu: [
       { name: "Detail", icon: DocumentChartBarIcon, to: "/user/income" },
-      {
-        name: "Reward",
-        icon: CreditCardIcon,
-        to: "/user/transaction/reward_transaction",
-      },
+      // {
+      //   name: "Reward",
+      //   icon: CreditCardIcon,
+      //   to: "/user/transaction/reward_transaction",
+      // },
       {
         name: "Level",
         to: "/user/transaction/invest_level_transaction/invest",
@@ -813,7 +820,6 @@ const navigation = [
     to: "#",
     icon: DocumentChartBarIcon,
     submenu: [
-      { name: "Membership Plan", icon: DocumentChartBarIcon, to: "/user/plan" },
       { name: "Support", icon: DocumentChartBarIcon, to: "/user/sendsupport" },
       {
         name: "Notification",
@@ -833,11 +839,11 @@ const wallet = [
 
 const income = [
   { name: "Detail", to: "/user/income", current: false },
-  {
-    name: "Reward",
-    to: "/user/transaction/reward_transaction",
-    current: false,
-  },
+  // {
+  //   name: "Reward",
+  //   to: "/user/transaction/reward_transaction",
+  //   current: false,
+  // },
   {
     name: "Direct",
     to: "/user/transaction/direct_transaction",
@@ -1075,6 +1081,9 @@ export default function UserMenu({ Children, PageName }) {
   return (
     <>
       <div className="min-h-full">
+        <div className="">
+          <UserTickerTape />
+        </div>
         <Disclosure as="nav" className="bg-gray-800">
           <div className="mx-auto max-w-7xl px-4 py-1">
             <div className="flex h-16 items-center justify-between">
@@ -1091,7 +1100,7 @@ export default function UserMenu({ Children, PageName }) {
                     </div>
                   </Link>
                 </div>
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     {navigation.map((item) => (
                       <div
@@ -1116,7 +1125,9 @@ export default function UserMenu({ Children, PageName }) {
                         ) : (
                           <Link
                             to={item.to}
-                            onClick={() => setActiveTab(item.name)}
+                            onClick={() => {setActiveTab(item.name);
+                              setOpenMenu(null);
+                            }}
                             className={`group flex items-center w-full rounded-md px-4 py-2 text-sm font-medium leading-6 hover:bg-gray-700 ${
                               activeTab === item.name
                                 ? "bg-gray-700 text-white"
@@ -1129,12 +1140,15 @@ export default function UserMenu({ Children, PageName }) {
 
                         {/* Dropdown for submenu */}
                         {openMenu === item.name && item.submenu.length > 0 && (
-                          <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg">
+                          <div className="absolute z-50 left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg">
                             {item.submenu.map((subItem) => (
                               <Link
                                 key={subItem.name}
                                 to={subItem?.to}
-                                onClick={() => setActiveTab(subItem.name)}
+                                onClick={() => {
+                                  setActiveTab(subItem.name);
+                                  setOpenMenu(null); 
+                                }}
                                 className={`block px-4 py-2 hover:bg-gray-700 ${
                                   activeTab === subItem.name
                                     ? "bg-gray-700 text-white"
@@ -1151,7 +1165,7 @@ export default function UserMenu({ Children, PageName }) {
                   </div>
                 </div>
               </div>
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <div className="ml-4 flex items-center md:ml-6">
                   <button
                     type="button"
@@ -1176,7 +1190,7 @@ export default function UserMenu({ Children, PageName }) {
                       </MenuButton>
                     </div>
 
-                    <MenuItems className="absolute right-0 z-10 mt-2 min-w-48 max-w-96 break-all origin-top-right rounded-sm bg-white py-1 shadow-lg ring-1 focus:outline-none">
+                    <MenuItems className="absolute right-0 z-50 mt-2 min-w-48 max-w-96 break-all origin-top-right rounded-sm bg-white py-1 shadow-lg ring-1 focus:outline-none">
                       <div className="flex items-center px-4 pb-1 border-b border-gray-400">
                         <div className="shrink-0">
                           <img
@@ -1187,13 +1201,12 @@ export default function UserMenu({ Children, PageName }) {
                         </div>
                         <div className="ml-3">
                           <div className="text-sm font-medium text-gray-700">
-                           {singleuser?.username}
+                            {singleuser?.fullname}
                           </div>
                           <div className="text-sm font-medium text-gray-600">
                             {singleuser?.email}
                           </div>
                         </div>
-                        
                       </div>
 
                       <Link to={`/user/profile/${auth?.id}`}>
@@ -1219,7 +1232,7 @@ export default function UserMenu({ Children, PageName }) {
                   </Menu>
                 </div>
               </div>
-              <div className="-mr-2 flex md:hidden">
+              <div className="-mr-2 flex lg:hidden">
                 {/* Mobile menu button */}
                 <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="absolute -inset-0.5" />
@@ -1237,7 +1250,7 @@ export default function UserMenu({ Children, PageName }) {
             </div>
           </div>
 
-          <DisclosurePanel className="md:hidden">
+          <DisclosurePanel className="lg:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
               {userNavigations.map((item) => (
                 <Link
@@ -1314,9 +1327,6 @@ export default function UserMenu({ Children, PageName }) {
         </Disclosure>
 
         <header className="bg-white shadow">
-          <div className=" mx-auto max-w-7xl px-4 pt-2">
-            <UserTickerTape />
-          </div>
           <div className="mx-auto max-w-7xl px-4 py-2 ">
             <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 p-4 sm:p-0  gap-4  w-full ">
               {singleuser?.cto == "false" && (
@@ -1351,6 +1361,7 @@ export default function UserMenu({ Children, PageName }) {
                   <p>Timer expired!</p>
                 )}
               </button>
+
               <button className="  text-gray-100 px-3 py-1.5 rounded-lg focus:outline-none border bg-gradient-to-tr from-[#7344e6]  to-[#8d9696] shadow-lg">
                 <p className="text-[14px]  font-semibold text-gray-100">
                   ${singleuser?.business?.toFixed(2) || 0}

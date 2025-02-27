@@ -26,13 +26,13 @@ export default function UserDirectMember() {
     <>
       <div className="my-5 lg:mx-3 sm:mx-3 p-4 bg-[#111c54c7]">
         <div className="flex flex-wrap items-center justify-between w-full mb-3 ">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-200">Your Member</h3>
+          <div className="sm:order-2 order-1">
+            <h3 className="text-lg font-semibold text-gray-200 sm:text-end">Your Member</h3>
             <p className="text-lg text-gray-300">
               Overview of the Your Member.
             </p>
           </div>
-          <div className="mt-3 lg:ml-3 sm:mt-0">
+          <div className="mt-3 lg:ml-3 sm:mt-0 sm:order-1 order-2">
             <div className="relative flex w-full max-w-sm gap-5">
               <div className="relative">
                 <input

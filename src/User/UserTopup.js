@@ -179,20 +179,20 @@ export default function UserTopup() {
       {error && <ErrorAlert error={error} />}
       <div className="p-4 m-3  bg-[#111c54c7]">
         <div className="flex-col items-start justify-between w-full mb-3 lg:flex sm:flex md:flex-row md:items-center lg:pl-3">
-          <div>
-            <h3 className="text-lg font-semibold text-slate-100">
+          <div className="order-1 sm:order-2">
+            <h3 className="text-lg sm:text-right font-semibold text-slate-100">
               Top-Up History
             </h3>
             <p className="text-lg text-slate-100">
               Overview of the Top-Up History.
             </p>
           </div>
-          <div className="mt-3 md:mt-0 lg:ml-3">
+          <div className="mt-3 md:mt-0  order-2 sm:order-1">
             <div className="relative flex max-w-full gap-3 md:gap-5 md:max-w-lg">
               <div className="relative ">
                 <input
                      className="w-full h-10 py-2 pl-3 text-lg transition duration-200 border rounded shadow-sm text-gray-100 bg-[#7e66c5b3] pr-11 placeholder:text-slate-100  border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-100 focus:shadow-md"
-                  placeholder="Search for invoice..."
+                  placeholder="Search..."
                 />
                 <button
                   className="absolute flex items-center justify-center w-8 h-8 text-gray-100 rounded right-1 top-1"

@@ -215,15 +215,15 @@ export default function UserDepositeModel({ openModel, modelClose }) {
 
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <DialogPanel className="relative transform overflow-hidden rounded-lg bg-blue-900/50 border px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-            <div className="p-5">
+          <DialogPanel className="relative transform overflow-hidden rounded-lg bg-gray-900/50 border px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-md sm:p-6">
+            {/* <div className="p-5">
               <div className="pb-5 flex justify-between items-center">
-                <h2 className="text-xl font-semibold mb-5 text-gray-300">
+                <h2 className="text-xl font-semibold mb-3 text-gray-300">
                   Deposit USDT
                 </h2>
                 <button
                   onClick={modelClose}
-                  className="group flex cursor-pointer items-center justify-center mb-2 bg-blue-900 h-[50px] w-[50px]"
+                  className="group absolute top-0 right-0 flex cursor-pointer items-center justify-center mb-2 bg-gray-900 h-[50px] w-[50px]"
                 >
                   <div className="space-y-2">
                     <span className="block h-1 w-10 origin-center rounded-full bg-slate-500 transition-transform ease-in-out group-hover:translate-y-1.5 group-hover:rotate-45"></span>
@@ -240,12 +240,12 @@ export default function UserDepositeModel({ openModel, modelClose }) {
                 ) : (
                   <>
                     <div className="text-gray-200">
-                      <p className="text-sm">
-                        Connected: {address?.slice(0, 6)}...
-                        {address?.slice(-4)}
+                      <p className="text-sm flex justify-between">
+                        Connected <span> {address?.slice(0, 6)}...
+                        {address?.slice(-4)}</span>
                       </p>
-                      <p className="text-sm">Balance: {usdtBalance} USDT</p>
-                      <p className="text-sm">Balance: {bnbBalance} BNB</p>
+                      <p className="text-sm flex justify-between">Balance <span>{usdtBalance} USDT</span></p>
+                      <p className="text-sm flex justify-between">Balance <span>{bnbBalance} BNB</span></p>
                     </div>
                     <div className="space-y-2">
                       <label
@@ -295,6 +295,91 @@ export default function UserDepositeModel({ openModel, modelClose }) {
                         onClick={handleTransfer}
                         disabled={isLoading || !amount}
                         className="w-full px-4 py-2 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed"
+                      >
+                        {isLoading ? <Spinner /> : "Confirm Deposit"}
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div> */}
+            <div className="p-6 bg-gray-900 rounded-lg shadow-xl">
+              <div className="pb-5 flex justify-center items-center border-b border-gray-700">
+                <h2 className="text-2xl  text-center font-semibold text-white">
+                  Deposit USDT
+                </h2>
+              </div>
+
+              <div className="space-y-5 mt-5">
+                {!isConnected ? (
+                  <div className="text-gray-300 text-center text-sm bg-gray-800 p-3 rounded-md">
+                    Please connect your wallet on the main page.
+                  </div>
+                ) : (
+                  <>
+                    <div className="text-gray-200 space-y-3 bg-gray-800 p-4 rounded-md">
+                      <p className="text-sm flex justify-between">
+                        <span className="font-medium">Connected</span>
+                        <span className="text-indigo-400">
+                          {address?.slice(0, 6)}...{address?.slice(-4)}
+                        </span>
+                      </p>
+                      <p className="text-sm flex justify-between">
+                        <span className="font-medium">USDT Balance</span>
+                        <span>{usdtBalance} USDT</span>
+                      </p>
+                      <p className="text-sm flex justify-between">
+                        <span className="font-medium">BNB Balance</span>
+                        <span>{bnbBalance} BNB</span>
+                      </p>
+                    </div>
+
+                    <div className="space-y-3">
+                      <label className="block text-sm font-medium text-gray-300">
+                        Deposit Address
+                      </label>
+                      <div className="flex items-center justify-between space-x-2 text-white border border-gray-600 rounded-md p-3 bg-gray-800">
+                        <p className="text-sm truncate">{qr?.BEB20}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <label className="block text-sm font-medium text-gray-300">
+                        Amount (USDT)
+                      </label>
+                      <input
+                        id="amount"
+                        type="text"
+                        value={amount}
+                        onChange={handleAmountChange}
+                        className="block w-full text-sm border border-gray-600 text-gray-200 rounded-lg px-4 py-2 bg-gray-800 focus:ring-2 focus:ring-indigo-400 outline-none"
+                        placeholder="Enter amount..."
+                      />
+                    </div>
+
+                    {error && (
+                      <div className="text-red-500 text-sm  rounded-md">
+                        {error}
+                      </div>
+                    )}
+
+                    {success && (
+                      <div className="text-green-500 text-sm text-center bg-green-900 p-2 rounded-md">
+                        {success}
+                      </div>
+                    )}
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <button
+                        onClick={handleCancel}
+                        className="w-full px-4 py-2 text-sm bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={handleTransfer}
+                        disabled={isLoading || !amount}
+                        className="w-full px-4 py-2 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 disabled:bg-indigo-400 disabled:cursor-not-allowed"
                       >
                         {isLoading ? <Spinner /> : "Confirm Deposit"}
                       </button>

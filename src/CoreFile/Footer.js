@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaTelegram } from "react-icons/fa";
 import { IoIosCall } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { GiPositionMarker } from "react-icons/gi";
@@ -64,22 +64,28 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <Link
-                href="https://www.facebook.com/profile.php?id=61573153156219"
+                to="https://www.facebook.com/profile.php?id=61565903956067"
                 className="p-2 rounded-full bg-white/10 hover:bg-white/20"
               >
                 <FaFacebookF className="w-5 h-5" />
               </Link>
               <Link
-                href="https://x.com/earn_4u"
+                to="https://x.com/earn_4u"
                 className="p-2 rounded-full bg-white/10 hover:bg-white/20"
               >
                 <FaTwitter className="w-5 h-5" />
               </Link>
               <Link
-                href="https://www.instagram.com/_earn4u_/"
+                to="https://www.instagram.com/_earn4u_/"
                 className="p-2 rounded-full bg-white/10 hover:bg-white/20"
               >
                 <FaInstagram className="w-5 h-5 " />
+              </Link>
+              <Link
+                to="https://t.me/earn4uofficial"
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20"
+              >
+                <FaTelegram className="w-5 h-5 " />
               </Link>
             </div>
           </div>

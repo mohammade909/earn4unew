@@ -56,12 +56,12 @@ export default function UserIncomeTransaction() {
   return (
     <>
       <div className="m-3 p-4 bg-[#111c54c7]">
-        <div className="flex flex-col items-center justify-between w-full pl-3 mb-3 sm:flex-row">
-          <div>
-            <h3 className="text-lg font-semibold text-slate-300">Transaction History</h3>
+        <div className="flex flex-col items-center justify-between w-full  mb-3 sm:flex-row">
+          <div className="sm:order-2 order-1">
+            <h3 className="text-lg sm:text-right font-semibold text-slate-300">Transaction History</h3>
             <p className="text-lg text-slate-400">Overview of the Transaction History.</p>
           </div>
-          <div className="mt-3 ml-3 sm:mt-0">
+          <div className="mt-3  sm:mt-0 sm:order-1 order-2">
             <div className="relative flex w-full max-w-sm gap-5">
               <div className="relative">
                 <input

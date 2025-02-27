@@ -62,13 +62,10 @@ export default function UserProfile() {
           <>
             {message && <SuccessAlert message={message} />}
             {error && <ErrorAlert error={error} />}
-            <div className=" relative z-10  max-w-7xl mx-auto">
-            {/* <div className="absolute inset-0 bg-black opacity-20"></div> */}
+            {/* <div className=" relative z-10  max-w-7xl mx-auto">
               <div className="max-w-full text-white bg-[#111c54c7] rounded shadow overflow-hidden">
                 <div className="grid grid-cols-2 gap-6 px-6 py-4">
-                  
                   <div className="w-full p-4 rounded-sm text-gray-100 bg-[#569182c7]">
-                    {/* Bep 20 Input */}
                     <div className="flex flex-col w-full gap-2 mt-4">
                       <label className="font-medium =">
                         Bep 20
@@ -105,23 +102,7 @@ export default function UserProfile() {
                         placeholder="Enter Bep 20 value"
                       />
                     </div>
-
-                    {/* Trc 20 Input */}
-                    {/* <div className="flex flex-col w-full gap-2 mt-4">
-                      <label className="font-medium text-gray-300">
-                        Trc 20
-                      </label>
-                      <input
-                        name="trc20"
-                        onChange={handleChange}
-                        defaultValue={singleuser?.trc20}
-                        className="w-full px-2 py-3 text-lg text-gray-300 rounded bg-blue-800/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter Trc 20 value"
-                      />
-                    </div> */}
-
-                    {/* Update Button */}
-                    <div className="flex justify-start w-full mt-6 ">
+                     <div className="flex justify-start w-full mt-6 ">
                       <button
                         onClick={handleSaveChanges}
                         className="w-full px-6 py-2 text-lg font-semibold text-gray-100 bg-[#4b1725ab] transition duration-200 rounded  sm:w-auto hover:bg-[#291017ab]"
@@ -199,8 +180,90 @@ export default function UserProfile() {
                   </div>
                 </div>
               </div>
+            </div> */}
+            <div className="relative z-10 max-w-7xl mx-auto ">
+  <div className="bg-[#1e2a3a] text-white rounded-lg shadow-lg p-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {/* Left Column - Form Section */}
+      <div className="bg-[#2a3b4c] p-6 rounded-lg shadow-md">
+        <h3 className="text-2xl font-semibold mb-4">Update Details</h3>
+
+        <div className="space-y-4">
+          {/* Bep 20 Input */}
+          <div>
+            <label className="block font-medium mb-1">Bep 20</label>
+            <input
+              name="bep20"
+              onChange={handleChange}
+              defaultValue={singleuser?.bep20}
+              className="w-full p-3 bg-[#4b5c6c] text-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter Bep 20 value"
+            />
+          </div>
+
+          {/* Email Input */}
+          <div>
+            <label className="block font-medium mb-1">Email</label>
+            <input
+              name="email"
+              onChange={handleChange}
+              defaultValue={singleuser?.email}
+              className="w-full p-3 bg-[#4b5c6c] text-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter Email"
+            />
+          </div>
+
+          {/* Phone Input */}
+          <div>
+            <label className="block font-medium mb-1">Phone</label>
+            <input
+              name="phone"
+              onChange={handleChange}
+              defaultValue={singleuser?.phone}
+              className="w-full p-3 bg-[#4b5c6c] text-gray-100 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter Phone Number"
+            />
+          </div>
+
+          {/* Update Button */}
+          <button
+            onClick={handleSaveChanges}
+            className="w-full bg-[#4b1725] text-lg font-semibold py-3 rounded-md hover:bg-[#291017] transition duration-300"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+
+      {/* Right Column - User Details */}
+      <div>
+        <h3 className="text-2xl font-semibold mb-4">{singleuser?.username} Details</h3>
+
+        <div className="bg-[#2a3b4c] p-6 rounded-lg shadow-md space-y-4">
+          {/* User Details Grid */}
+          {[
+            { label: "Last Login", value: singleuser?.last_login },
+            { label: "Created At", value: singleuser?.created_at },
+            { label: "Referred By", value: singleuser?.reffer_by },
+            { label: "Activation Date", value: singleuser?.activation_date },
+            { label: "Updated Date", value: singleuser?.updated_at },
+            { 
+              label: "Referral Code", 
+              value: singleuser?.active_plan !== 0 ? "Referral code not active" : singleuser?.refferal_code 
+            },
+            { label: "Total Team", value: singleuser?.total_team }
+          ].map(({ label, value }, index) => (
+            <div key={index} className="flex justify-between border-b border-gray-500 pb-2">
+              <span className="font-medium text-gray-300">{label}</span>
+              <span className="text-gray-200">{value || "-"}</span>
             </div>
-            {/* <div className="h-[2px] bg-gray-800 w-full border-t" /> */}
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
           </>
         )}
       </div>

@@ -169,39 +169,28 @@ export default function UserIncome() {
   ];
 
   return (
-    <div className="overflow-x-auto">
-    <table className="min-w-full overflow-hidden bg-[#111c54c7] divide-y divide-gray-200 shadow sm:rounded-sm">
-   
-      <tbody className="divide-y divide-gray-900 text-gray-100 bg-[#569182c7]">
-        {projects.length> 0?(
-        projects.map((project) => (
-          <tr key={project.name}>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="flex items-center">
-                <div className={classNames(project.bgColor, 'flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center text-white text-lg font-bold')}>
-                  {project.initials}
-                </div>
-                <div className="ml-4">
-                  <div className="text-lg font-medium ">{project.name}</div>
-                </div>
-              </div>
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-              <div className="text-lg ">{project.members}</div>
-            </td>
-          </tr>
-        )) ):(
-          <tr>
-          <td
-            colSpan="6"
-            className="py-4 text-lg text-center text-gray-200 bg-[#4b1725ab]"
-          >
-            No data available
-          </td>
-        </tr>
-        )}
-      </tbody>
-    </table>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-[#1e2a3a]">
+    {projects.length > 0 ? (
+      projects.map((project) => (
+        <div key={project.name} className="bg-[#2a3b4c] p-4 rounded-sm shadow-lg hover:shadow-xl transition duration-300">
+          <div className="flex items-center space-x-4">
+            <div className={classNames(project.bgColor, 'h-14 w-14 rounded-full flex items-center justify-center text-white text-xl font-semibold')}>
+              {project.initials}
+            </div>
+            <div>
+              <h3 className="text-white text-base font-semibold">{project.name}</h3>
+              <p className="text-gray-300 text-sm">Members: {project.members}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    ) : (
+      <div className="col-span-full text-center text-gray-400 text-xl py-6 bg-[#2a3b4c] rounded-lg">
+        No data available
+      </div>
+    )}
   </div>
+  
+  
   );
 }

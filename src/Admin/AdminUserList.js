@@ -67,7 +67,7 @@ export default function AdminUserList() {
   
   useEffect(() => {
     const filteredUsers = allUser
-      ?.filter((item) => item.role !== "admin")
+      ?.filter((item) => item.role === "user")
       ?.filter(
         (item) =>
           item.email.toLowerCase().includes(searchQuery.toLowerCase()) || // Ensure case-insensitive matching

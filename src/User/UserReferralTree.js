@@ -5,7 +5,6 @@ import "./ReferralTree.css"; // Import your CSS file here
 
 // TreeNode Component
 
-
 const calculateTotalBusiness = (user) => {
   let totalBusiness = Number(user.active_plan) || 0;
   if (Array.isArray(user?.referrals) && user?.referrals.length > 0) {
@@ -16,14 +15,13 @@ const calculateTotalBusiness = (user) => {
   return totalBusiness;
 };
 
-
 const TreeNode = ({ user, expandedNodes, toggleExpand, isWhite }) => {
-  const bgColor = isWhite ? "#FFFFFF" : "#D1D5DB"; // White or Gray based on index
+  const bgColor = isWhite ? "black" : "#D1D5DB"; // White or Gray based on index
   const borderColor = isWhite ? "border-gray-400" : "border-gray-300"; // Alternating borders
   return (
     <li className="relative flex flex-col items-center">
       {/* Before condition */}
-      <div className="before-condition text-lg text-gray-500">
+      <div className="before-condition text-lg text-gray-200 ">
         {/* Before: {user.beforeCondition || "N/A"} */}
       </div>
 
@@ -36,28 +34,36 @@ const TreeNode = ({ user, expandedNodes, toggleExpand, isWhite }) => {
         className={`border ${borderColor} py-2 px-4 rounded hover:bg-blue-100 flex items-center`}
         style={{ backgroundColor: bgColor }} // Use the defined background color
       >
-        <div className="relative">
-          <img
-            src="/default.jpg" // Placeholder image
-            alt={user?.username}
-            className="w-10 h-10 rounded-full border border-gray-300 cursor-pointer"
-          />
-          {user?.referrals && user?.referrals.length > 0 && (
-            <div className="absolute w-0 h-full bg-gray-300 left-1/2 transform -translate-x-1/2 top-10"></div>
-          )}
+        <div className="relative flex items-center gap-2 text-white">
+          <div>
+            <img
+              src="/default.jpg" // Placeholder image
+              alt={user?.username}
+              className="w-10 h-10 rounded-full border border-gray-300 cursor-pointer"
+            />
+            {user?.referrals && user?.referrals.length > 0 && (
+              <div className="absolute w-0 h-full bg-gray-300 left-1/2 transform -translate-x-1/2 top-10"></div>
+            )}
+          </div>
+          <div className="text-left">
+            <div className="font-semibold break-all">{user?.username}</div>
+            <div className="break-all">{user?.email}</div>
+            <div className="text-left"> {user?.is_active}</div>
+          </div>
         </div>
-        <div className="ml-2">
-          <div className="font-semibold">{user?.username}</div>
-          <div>Email: {user?.email}</div>
-          <div>Status: {user?.is_active}</div>
-          <div className="font-semibold">Self business : ${user?.active_plan}</div>
-          <div className="font-semibold">Refferal : ${user?.refferal_code}</div>
-          <div className="font-semibold">Total business : ${calculateTotalBusiness(user)}</div>
+        <div className="ml-2 mt-2 text-gray-200">
+          
+          <div className="">
+            Self business : ${user?.active_plan}
+          </div>
+          <div className="">Refferal : ${user?.refferal_code}</div>
+          <div className="">
+            Total business : ${calculateTotalBusiness(user)}
+          </div>
         </div>
       </a>
 
-      <div className="after-condition text-lg text-gray-500">
-      </div>
+      <div className="after-condition text-lg text-gray-500"></div>
 
       {expandedNodes[user.id] &&
         user.referrals &&
@@ -69,7 +75,7 @@ const TreeNode = ({ user, expandedNodes, toggleExpand, isWhite }) => {
                   user={childUser}
                   expandedNodes={expandedNodes}
                   toggleExpand={toggleExpand}
-                  isWhite={index % 2 === 0} 
+                  isWhite={index % 2 === 0}
                 />
               </li>
             ))}
@@ -104,18 +110,25 @@ const UserReferralTree = () => {
   return (
     <div className="py-12 overflow-auto genealogy-scroll whitespace-nowrap min-h-screen text-center bg-gray-900">
       <div className="flex justify-center items-center mb-6">
-        <div className="relative">
-          <img
-            src="/default.jpg" // Placeholder image
-            alt={auth?.username}
-            className="w-10 h-10 rounded-full border border-gray-300"
-          />
-        </div>
-        <div className="ml-2 text-white">
-          <div className="font-semibold">{auth?.username}</div>
-          <div>ID: {auth?.id}</div>
-          <div>Email: {auth?.email}</div>
-          <div>Status: {auth?.is_active ? "Active" : "Inactive"}</div>
+        <div className="bg-black p-4  rounded-md">
+          <div className="relative justify-center flex mb-3">
+            <div className="text-white absolute -top-10 rounded-t-lg bg-blue-800 px-3 py-1 text-xs">
+              {" "}
+              {auth?.is_active ? "Active" : "Inactive"}
+            </div>
+            <img
+              src="/default.jpg" // Placeholder image
+              alt={auth?.username}
+              className="w-10 h-10 rounded-full border border-gray-300"
+            />
+          </div>
+          <div className="ml-2 text-white">
+            <div className="font-medium text-sm py-1 bg-green-600">
+              {auth?.username}
+            </div>
+            <div>ID: {auth?.id}</div>
+            <div>Email: {auth?.email}</div>
+          </div>
         </div>
       </div>
 

@@ -198,7 +198,7 @@ export default function Connect() {
 
   return (
     <div className="w-full ">
-      <div className="backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden">
+      <div className="backdrop-blur-md bg-gray-900/50 rounded-sm sm:px-8  px-4 shadow-2xl overflow-hidden">
         {isConnected ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6">
             <div className="backdrop-blur-sm bg-yellow-500/10 rounded-xl p-4 border border-yellow-500/20">

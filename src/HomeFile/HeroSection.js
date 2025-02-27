@@ -96,3 +96,51 @@ export const HeroSection = () => {
     </div>
   );
 };
+
+
+// import React from 'react'
+// import ScrollingBanner from './ScrollingBanner'
+
+// export const HeroSection = () => {
+//   return (
+//     <>
+//     <main className="relative min-h-screen">
+//       {/* Header Section */}
+//       <div className="container mx-auto px-4 pt-16 pb-8 relative z-10">
+//         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+//           <div className="max-w-xl">
+//             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+//               Elevate Your Style with Our Exclusive Collections
+//             </h1>
+//             <p className="text-gray-600">
+//               Welcome to our lifestyle blog, your ultimate destination for embracing the richness of life. Dive into a
+//               world of inspiration,
+//             </p>
+//           </div>
+//           {/* <div className="mt-6 md:mt-0">
+//             <CircularLogo />
+//           </div> */}
+//         </div>
+//       </div>
+
+//       {/* Scrolling Banner */}
+//       <div className="w-full relative z-10">
+//         {/* <ScrollingBanner /> */}
+//       </div>
+
+//       {/* Hero Image */}
+//       <div className="w-full h-[60vh] md:h-[70vh] relative">
+//         <img
+//           src="/hero-image.jpg"
+//           alt="Fashion models showcasing exclusive collections"
+//           fill
+//           priority
+//           className="object-cover"
+//         />
+//       </div>
+//     </main>
+    
+//     </>
+//   )
+// }
+

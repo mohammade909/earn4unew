@@ -192,16 +192,16 @@ export default function UserAddSupport() {
 {error && <ErrorAlert error={error} />}
 <div className="m-3 p-4 relative z-10 bg-[#111c54c7]">
 <div className="absolute inset-0 bg-black opacity-20"></div>
-  <div className="flex-col items-center justify-between w-full mb-3 lg:flex md:flex-row lg:pl-3">
-    <div>
-      <h3 className="text-lg font-semibold text-gray-200">Get Support</h3>
+  <div className="flex-col items-center justify-between w-full mb-3 lg:flex md:flex-row">
+    <div className="sm:order-2 order-1">
+      <h3 className="text-lg font-semibold text-gray-200 sm:text-right">Get Support</h3>
       <p className="text-lg text-slate-300">Overview of the current Support.</p>
     </div>
-    <div className="flex flex-col items-start gap-3 mt-3 md:mt-0 md:flex-row md:items-center">
+    <div className="sm:order-1 order-2 flex flex-col items-start gap-3 mt-3 md:mt-0 md:flex-row md:items-center">
       <div className="relative w-full md:w-72">
         <input
            className="w-full h-10 py-2 pl-3 text-lg transition duration-200 border rounded shadow-sm text-gray-100 bg-[#7e66c5b3] pr-11 placeholder:text-slate-100  border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-100 focus:shadow-md"
-          placeholder="Search for invoice..."
+          placeholder="Search..."
         />
         <button
           className="absolute flex items-center justify-center w-8 h-8 text-gray-900 rounded right-1 top-1"
