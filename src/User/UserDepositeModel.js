@@ -171,13 +171,33 @@ export default function UserDepositeModel({ openModel, modelClose }) {
           return tx.wait();
         })
         .then(async (txReceipt) => {
-          // await fetchBalances();
-          const formData = new FormData();
-          formData.append("amount", amount);
-          formData.append("user_id", auth?.id);
-          formData.append("hash", txReceipt?.hash);
+          try {
+            if (txReceipt && txReceipt.hash) {
+              // Create form data with all required information
+              const formData = new FormData();
+              formData.append("amount", amount);
+              formData.append("user_id", auth?.id);
+              formData.append("hash", txReceipt.hash);
 
-          dispatch(addDeposite(formData));
+              // Dispatch the action
+              await dispatch(addDeposite(formData));
+
+              // Optional: Update success message after deposit is added
+              setSuccess(
+                "Transaction confirmed and deposit recorded successfully!"
+              );
+
+              // Fetch updated balances
+              // await fetchBalances();
+            } else {
+              throw new Error("Transaction receipt is missing hash");
+            }
+          } catch (dispatchError) {
+            console.error("Error adding deposit:", dispatchError);
+            setSuccess(
+              "Transaction confirmed but failed to record deposit. Please contact support."
+            );
+          }
         })
         .catch((error) => {
           console.error("Error during transaction:", error);

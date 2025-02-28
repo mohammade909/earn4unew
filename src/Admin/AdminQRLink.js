@@ -155,21 +155,21 @@ const AdminQrLink = () => {
                             <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
                               <div className="">
                                 <div className="font-mono text-lg leading-6 ">
-                                  ${qr?.id}
+                                  {qr?.id}
                                 </div>
                               </div>
                             </td>
                             <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
                               <div className="">
                                 <div className="font-mono text-lg leading-6 ">
-                                  ${qr?.BEB20}
+                                  {qr?.BEB20}
                                 </div>
                               </div>
                             </td>{" "}
                             <td className="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
                               <div className="">
                                 <div className="font-mono text-lg leading-6 ">
-                                  ${qr?.TRC20}
+                                  {qr?.TRC20}
                                 </div>
                               </div>
                             </td>

@@ -205,7 +205,7 @@ export default function AdminUserList() {
                         </td>
                         <td className="px-4 py-4 border border-gray-300">
                           <div className="flex justify-between">
-                            {admin.role ==='subadmin' &&
+                            {admin?.role ==='subadmin' &&
                             <button
                               onClick={() =>
                                 handleCash(
@@ -218,7 +218,7 @@ export default function AdminUserList() {
                               <FaArrowAltCircleUp />
                             </button>}
                             <div>${item?.business}</div>
-                            {admin.role  ==='subadmin' &&
+                            {admin?.role  ==='subadmin' &&
                             <button
                               onClick={() =>
                                 handleCash(

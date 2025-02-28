@@ -70,8 +70,8 @@ const UserDepostie = () => {
       {message && <SuccessAlert message={message} />}
       {error && <ErrorAlert error={error} />}
       <div className="my-5 ">
-      <WalletConnection />
-        {/* <div className="flex-col items-center justify-between w-full mt-8 mb-3 lg:flex sm:flex sm:flex-row ">
+        <WalletConnection />
+        <div className="flex-col items-center justify-between w-full mt-8 mb-3 lg:flex sm:flex sm:flex-row ">
           <div className="mb-2 sm:mb-0">
             <h3 className="text-lg font-semibold text-gray-200">
               Deposit History
@@ -109,11 +109,8 @@ const UserDepostie = () => {
               </div>
             </div>
           </div>
-        
-        </div> */}
-     
-      
-{/*       
+        </div>
+
         <div className="relative flex flex-col w-full h-full py-1 mb-4 text-gray-300 rounded-lg shadow-md bg-clip-border">
           {loading ? (
             <Loader />
@@ -243,7 +240,7 @@ const UserDepostie = () => {
               </table>
             </div>
           )}
-        </div> */}
+        </div>
       </div>
 
       {previewImage && (
@@ -258,13 +255,12 @@ const UserDepostie = () => {
               onClick={handleClosePreview}
               className="absolute p-2 text-xl text-white bg-black rounded-full top-2 right-2"
             >
-              ×  
+              ×
             </button>
           </div>
         </div>
       )}
 
-   
       {modalOpen && (
         <Confirmation
           isClose={isClose}

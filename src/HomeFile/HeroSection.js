@@ -23,7 +23,7 @@ const features = [
 export const HeroSection = () => {
   return (
     <div className="bg-black">
-      <div className="container px-6 pt-16 pb-8 mx-auto">
+      <div className="container px-6  py-4 mx-auto">
         <div className="grid items-center gap-12 lg:grid-cols-3">
           {/* Left Content */}
           <div className="space-y-6 text-center lg:text-left">
