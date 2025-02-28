@@ -254,11 +254,10 @@ const UserDashboard = () => {
       iconBgColor: "bg-red-300",
       gredient: " border-t bg-gradient-to-r from-gray-900 to-red-900",
       percentage: "55",
-     
     },
     {
       id: 5,
-     
+
       description: "Reward Rank",
       value: `${singleuser?.reward_level} Level`,
       // value: `$ ${singleuser?.reward}`,
@@ -405,7 +404,7 @@ const UserDashboard = () => {
     {
       members: `$ ${singleuser?.level_month}` || 0,
       name: "Level Income",
-     
+
       initials: "IS",
       icon: CursorArrowRaysIcon,
       bgColor: "bg-red-600",
@@ -518,37 +517,40 @@ const UserDashboard = () => {
         <div className="absolute inset-0 z-5  opacity-30"></div>
 
         <div className=" sm:px-0 px-4 relative z-10  lg:max-w-7xl  ">
-        <div className="p-4 grid sm:grid-cols-2 grid-cols-1 gap-6 items-center bg-white/5 backdrop-blur-lg border border-white/20 rounded-sm shadow-xl">
-      {/* Welcome Message */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-        <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-          Welcome {singleuser?.fullname || "User"}
-          <CheckCircleIcon className="h-7 w-7 text-green-400 drop-shadow-md" />
-        </h2>
-        <span className="text-gray-300 text-lg sm:ml-3">Dashboard</span>
-      </div>
-      <div className="sm:flex justify-end">
-      <button className="relative sm:w-64 w-full flex items-center justify-center gap-3 py-3 px-6 font-medium text-white border border-gray-400 rounded-sm shadow-lg bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 transition-all duration-300">
-          <span className="uppercase tracking-wide">Referral Link</span>
-          <button
-            onClick={handleCopy}
-            className={`inline-flex items-center transition-colors duration-200 ${
-              isCopied ? "text-green-300" : "text-white"
-            }`}
-          >
-            {isCopied ? (
-              <FiCheck className="h-6 w-6" />
-            ) : (
-              <FiCopy className="h-6 w-6" />
-            )}
-          </button>
-          {/* Glow Effect on Copy */}
-          {isCopied && (
-            <span className="absolute inset-0 bg-green-400/10 blur-md rounded-full animate-ping"></span>
-          )}
-        </button>
-      </div>
-    </div>
+          <div className="p-4 grid sm:grid-cols-2 grid-cols-1 gap-6 items-center bg-white/5 backdrop-blur-lg border border-white/20 rounded-sm shadow-xl">
+            {/* Welcome Message */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <h2 className="text-xl font-semibold text-white flex items-center gap-2">
+                Welcome {singleuser?.fullname || "User"}
+                <CheckCircleIcon className="h-7 w-7 text-green-400 drop-shadow-md" />
+              </h2>
+              <span className="text-gray-300 text-lg sm:ml-3">Dashboard</span>
+            </div>
+            <div className="sm:flex justify-end">
+              {singleuser?.active_plan == 0 && (
+                <button className="relative sm:w-64 w-full flex items-center justify-center gap-3 py-3 px-6 font-medium text-white border border-gray-400 rounded-sm shadow-lg bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 transition-all duration-300">
+                  <span className="uppercase tracking-wide">Referral Link</span>
+
+                  <button
+                    onClick={handleCopy}
+                    className={`inline-flex items-center transition-colors duration-200 ${
+                      isCopied ? "text-green-300" : "text-white"
+                    }`}
+                  >
+                    {isCopied ? (
+                      <FiCheck className="h-6 w-6" />
+                    ) : (
+                      <FiCopy className="h-6 w-6" />
+                    )}
+                  </button>
+                  {/* Glow Effect on Copy */}
+                  {isCopied && (
+                    <span className="absolute inset-0 bg-green-400/10 blur-md rounded-full animate-ping"></span>
+                  )}
+                </button>
+              )}
+            </div>
+          </div>
           <div className="grid lg:grid-cols-4 sm:grid-cols-2  grid-cols-1 gap-x-4 gap-y-10   mt-10">
             {stat.map((item, i) => (
               <div

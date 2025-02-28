@@ -11,7 +11,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Header from "../../CoreFile/Header";
 import Footer from "../../CoreFile/Footer";
-
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -93,18 +94,20 @@ export default function Registration() {
       >
         <div className="absolute inset-0 bg-black opacity-80 "></div>
         <div className="flex flex-col justify-center items-center  p-6">
-        <div className="grid md:grid-cols-2 items-center gap-y-8 bg-white/10  max-w-7xl w-full shadow-lg rounded-md overflow-hidden">
+          <div className="grid md:grid-cols-2 items-center gap-y-8 bg-white/10  max-w-7xl w-full shadow-lg rounded-md overflow-hidden">
             <div className="relative flex flex-col  bg-opacity-10  justify-center  bg-green-600/50  w-full h-full">
               <div className=" max-w-md space-y-6 mx-auto text-white">
-              <div className=" mb-4 text-center">
-                <div>
-                  <h2 className="text-3xl font-bold leading-9 tracking-tight text-left ">
-                 Register 
-                  </h2>
+                <div className=" mb-4 text-center">
+                  <div>
+                    <h2 className="text-3xl font-bold leading-9 tracking-tight text-left ">
+                      Register
+                    </h2>
+                  </div>
                 </div>
-              </div>
                 <div>
-                  <h4 className="text-base font-semibold">Create Your Account</h4>
+                  <h4 className="text-base font-semibold">
+                    Create Your Account
+                  </h4>
                   <p className="text-sm text-gray-200 mt-2">
                     Welcome! Get started by creating your account.
                   </p>
@@ -130,7 +133,6 @@ export default function Registration() {
               </div>
             </div>
             <div className="relative w-full max-w-lg p-8 mx-3 text-gray-200 rounded-r-lg shadow-lg bg-gray-800/50 bg-opacity-10 backdrop-blur-lg sm:mx-0">
-             
               <form className="space-y-6" onSubmit={formik.handleSubmit}>
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                   <div className="w-full">
@@ -181,7 +183,6 @@ export default function Registration() {
                       </p>
                     )}
                   </div>
-                  
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -245,24 +246,28 @@ export default function Registration() {
                       )}
                   </div>
                 </div>
-                <div className="grid lg:grid-cols-2 gap-4 grid-cols-1 ">
-                <div className="w-full">
+                <div className="grid lg:grid-cols-2 gap-4 grid-cols-1">
+                  <div className="">
                     <label
-                      htmlFor="username"
-                      className="block text-base font-medium "
+                      htmlFor="phone"
+                      className="block text-base font-medium"
                     >
                       Phone
                     </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="number"
-                      placeholder="Enter Phone"
-                      required
+                    <PhoneInput
+                      country={"in"} // Default country
+                      inputProps={{
+                        id: "phone",
+                        name: "phone",
+                        required: true,
+                      }}
                       value={formik.values.phone}
-                      onChange={formik.handleChange}
+                      onChange={(phone) => formik.setFieldValue("phone", phone)}
                       onBlur={formik.handleBlur}
-                      className="block w-full px-4 py-2 mt-2 text-base placeholder-gray-200 bg-gray-700 border border-gray-500 rounded-md bg-opacity-10 backdrop-blur-lg focus:ring focus:ring-blue-500 focus:border-blue-500"
+                      containerClass="block mt-2"
+                      inputClass=" input-type text-black block w-full px-4 text-base placeholder-gray-200 bg-gray-700 border border-gray-500 rounded-md bg-opacity-10 backdrop-blur-lg focus:ring focus:ring-blue-500 focus:border-blue-500"
+                      buttonClass="border border-gray-500 bg-opacity-10 backdrop-blur-lg"
+                      dropdownClass="text-black"
                     />
                     {formik.touched.phone && formik.errors.phone && (
                       <p className="mt-2 text-xs text-red-500">
@@ -270,26 +275,26 @@ export default function Registration() {
                       </p>
                     )}
                   </div>
-                <div>
-                  <label
-                    htmlFor="referralBy"
-                    className="block text-base font-medium "
-                  >
-                    Referral Code
-                  </label>
-                  <input
-                    id="referralBy"
-                    name="referralBy"
-                    placeholder="Enter Referral Code"
-                    type="text"
-                    required
-                    value={referralCode || formik.values.referralBy}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    className="block w-full px-4 py-2 mt-2 text-base placeholder-gray-200 bg-gray-700 border border-gray-500 rounded-md bg-opacity-10 backdrop-blur-lg focus:ring focus:ring-amber-500 focus:border-amber-500"
-                    disabled={!!referralCode}
-                  />
-                </div>
+                  <div>
+                    <label
+                      htmlFor="referralBy"
+                      className="block text-base font-medium"
+                    >
+                      Referral Code
+                    </label>
+                    <input
+                      id="referralBy"
+                      name="referralBy"
+                      placeholder="Enter Referral Code"
+                      type="text"
+                      required
+                      value={referralCode || formik.values.referralBy}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      className="block w-full px-4 py-2 mt-2 text-base placeholder-gray-200 bg-gray-700 border border-gray-500 rounded-md bg-opacity-10 backdrop-blur-lg focus:ring focus:ring-amber-500 focus:border-amber-500"
+                      disabled={!!referralCode}
+                    />
+                  </div>
                 </div>
                 <button
                   type="submit"

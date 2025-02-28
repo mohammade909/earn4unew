@@ -247,9 +247,10 @@ export default function UserProfile() {
             { label: "Referred By", value: singleuser?.reffer_by },
             { label: "Activation Date", value: singleuser?.activation_date },
             { label: "Updated Date", value: singleuser?.updated_at },
+            
             { 
               label: "Referral Code", 
-              value: singleuser?.active_plan !== 0 ? "Referral code not active" : singleuser?.refferal_code 
+              value: singleuser?.active_plan == 0 ? "Referral code not active" : singleuser?.refferal_code 
             },
             { label: "Total Team", value: singleuser?.total_team }
           ].map(({ label, value }, index) => (
