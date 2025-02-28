@@ -67,16 +67,7 @@ export default function Header() {
               </div>
             </Link>
           </div>
-          <div className="flex lg:hidden">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(true)}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
-            >
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon className="w-6 h-6" aria-hidden="true" />
-            </button>
-          </div>
+          
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
               <Link
@@ -93,11 +84,11 @@ export default function Header() {
               </Link>
             ))}
           </div>
-          <div className="items-center hidden gap-4 lg:flex lg:justify-end">
+          <div className="items-center  gap-4 flex lg:justify-end">
             <div className="lg:flex lg:items-center">
               <div
                 id="google_translate_element"
-                className="block w-40 text-[12px] font-medium text-gray-800"
+                className="block w-32 text-[12px] font-medium text-gray-800"
               ></div>
             </div>
 
@@ -114,7 +105,7 @@ export default function Header() {
         font-size: 12px;
         color: white;
         border-radius: 5px;
-        width: 160px;
+        width: 140px;
       }
       .goog-logo-link, 
       .goog-te-gadget .goog-te-gadget-simple, 
@@ -127,7 +118,7 @@ export default function Header() {
     `}
             </style>
 
-            <Link to="/user/login">
+            <Link to="/user/login" className=" hidden gap-4 lg:flex lg:justify-end">
               <button className="bg-yellow-400 text-white p-1 rounded-full flex items-center gap-2">
                 <span className="bg-green-800 text-sm px-8 py-2 rounded-full">
                   Log in
@@ -137,6 +128,16 @@ export default function Header() {
                 </div>
               </button>
             </Link>
+            <div className="flex lg:hidden">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              className="-m-2.5 inline-flex items-center justify-end rounded-md p-2.5 text-gray-400"
+            >
+              <span className="sr-only">Open main menu</span>
+              <Bars3Icon className="w-6 h-6" aria-hidden="true" />
+            </button>
+          </div>
           </div>
         </nav>
         <Dialog
@@ -183,6 +184,7 @@ export default function Header() {
                 </Link>
               ))}
               <div >
+                
               <Link onClick={() => setMobileMenuOpen(false)} to="/user/login">
                 <button className=" bg-yellow-400 text-white   p-1 py-1 rounded-full flex items-center gap-2">
                   <span className="bg-green-800 px-8 py-2 rounded-full">
