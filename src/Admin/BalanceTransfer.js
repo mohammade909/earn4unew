@@ -217,21 +217,36 @@ const USDTTransfer = ({ user, id }) => {
       if (currentBalance < transferAmount) {
         throw new Error("Insufficient USDT balance");
       }
-
+      // Initiate the transfer
       const tx = await usdtContract.transfer(user.bep20, transferAmount);
-      await tx.wait();
 
-      dispatch(
-        updateWithdrawal({
-          id,
-          status: "complete",
-          amount: user?.amount + user.deduction,
-          user_id: user?.id,
-        })
-      );
-
-      await fetchBalances();
-      setIsModalOpen(false);
+      const res = await tx.wait();
+      if (!res.hash) {
+        throw new Error("Transaction failed: No transaction hash received.");
+      }
+      if (res && res.status === 1) {
+        // Dispatch the update with the transaction hash
+        dispatch(
+          updateWithdrawal({
+            id,
+            status: "complete",
+            amount: user?.amount + user.deduction,
+            user_id: user?.id,
+            txHash: tx.hash, // Sending transaction hash
+          })
+        )
+          .then(() => {
+            // Fetch balances after successful dispatch
+            return fetchBalances();
+          })
+          .then(() => {
+            setIsModalOpen(false);
+          })
+          .catch((dispatchError) => {
+            console.error("Dispatch error:", dispatchError);
+            setError("Transaction completed but updating status failed.");
+          });
+      }
     } catch (err) {
       console.error("Transfer error:", err);
       setError(err.message || "Transfer failed. Please try again.");

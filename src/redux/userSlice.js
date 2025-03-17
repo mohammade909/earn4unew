@@ -58,7 +58,6 @@ export const getAllRewards = createAsyncThunk(
     }
   }
 );
-
 export const getUser = createAsyncThunk(
   "staff/getUser",
   async (id, thunkAPI) => {

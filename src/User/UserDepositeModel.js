@@ -163,47 +163,56 @@ export default function UserDepositeModel({ openModel, modelClose }) {
         setError("Insufficient USDT balance");
         return;
       }
-
       contract
-        .transfer(qr.BEB20, amountInWei)
-        .then(async (tx) => {
-          setSuccess("Transaction submitted. Waiting for confirmation...");
-          return tx.wait();
-        })
-        .then(async (txReceipt) => {
-          try {
-            if (txReceipt && txReceipt.hash) {
-              // Create form data with all required information
-              const formData = new FormData();
-              formData.append("amount", amount);
-              formData.append("user_id", auth?.id);
-              formData.append("hash", txReceipt.hash);
-
-              // Dispatch the action
-              await dispatch(addDeposite(formData));
-
-              // Optional: Update success message after deposit is added
-              setSuccess(
-                "Transaction confirmed and deposit recorded successfully!"
-              );
-
-              // Fetch updated balances
-              // await fetchBalances();
-            } else {
-              throw new Error("Transaction receipt is missing hash");
-            }
-          } catch (dispatchError) {
-            console.error("Error adding deposit:", dispatchError);
-            setSuccess(
-              "Transaction confirmed but failed to record deposit. Please contact support."
-            );
+      .transfer(qr.BEB20, amountInWei)
+      .then(async (tx) => {
+        setSuccess("Transaction submitted. Waiting for confirmation...");
+        return tx.wait();
+      })
+      .then(async (txReceipt) => {
+        try {
+          if (txReceipt && txReceipt.hash) {
+            console.log(amount, auth?.id, txReceipt.hash);
+    
+            const formData = new FormData();
+            formData.append("amount", amount);
+            formData.append("user_id", auth?.id);
+            formData.append("hash", txReceipt.hash);
+            formData.append("status", "complete");
+    
+            // Dispatch and unwrap the action
+            await dispatch(addDeposite(formData))
+              .unwrap()
+              .then(() => {
+                setSuccess(
+                  "Transaction confirmed and deposit recorded successfully!"
+                );
+                window.location.reload();
+              })
+              .catch((dispatchError) => {
+                console.error("Error adding deposit:", dispatchError);
+                setSuccess(
+                  "Transaction confirmed but failed to record deposit. Please contact support."
+                );
+              });
+    
+            // Fetch updated balances after successful deposit
+            await fetchBalances();
+          } else {
+            throw new Error("Transaction receipt is missing hash");
           }
-        })
-        .catch((error) => {
-          console.error("Error during transaction:", error);
-          setSuccess("Transaction failed. Please try again.");
-        });
-
+        } catch (error) {
+          console.error("Error during transaction processing:", error);
+          setSuccess(
+            "Transaction confirmed but an error occurred while processing. Please contact support."
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error during transaction:", error);
+        setSuccess("Transaction failed. Please try again.");
+      });
+    
       // Close modal after successful transaction
       setTimeout(() => {
         modelClose();

@@ -5,7 +5,7 @@ export const addTopup = createAsyncThunk(
   "staff/addTopup",
   async ({ values }, thunkAPI) => {
     try {
-      console.log(values)
+
       const response = await fetch(`https://api.earn4u.info/api/v1/topup/add`, {
         method: "POST",
         headers: {

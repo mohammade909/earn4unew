@@ -28,6 +28,7 @@ import NotificationList from "./NotificationList";
 import { UserAchievement } from "./UserAchivement";
 import { Link } from "react-router-dom";
 import UserTradingView from "./UserTradingView";
+import TrendingOffersBanner from "./OfferBanners";
 
 const UserDashboard = () => {
   const dispatch = useDispatch();
@@ -515,10 +516,11 @@ const UserDashboard = () => {
     <>
       <div className=" text-gray-900  relative z-10 ">
         <div className="absolute inset-0 z-5  opacity-30"></div>
-
+         {/* <TrendingOffersBanner/> */}
         <div className=" sm:px-0 px-4 relative z-10  lg:max-w-7xl  ">
           <div className="p-4 grid sm:grid-cols-2 grid-cols-1 gap-6 items-center bg-white/5 backdrop-blur-lg border border-white/20 rounded-sm shadow-xl">
             {/* Welcome Message */}
+
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
               <h2 className="text-xl font-semibold text-white flex items-center gap-2">
                 Welcome {singleuser?.fullname || "User"}
@@ -527,7 +529,7 @@ const UserDashboard = () => {
               <span className="text-gray-300 text-lg sm:ml-3">Dashboard</span>
             </div>
             <div className="sm:flex justify-end">
-              {singleuser?.active_plan == 0 && (
+              {singleuser?.active_plan > 0 && (
                 <button className="relative sm:w-64 w-full flex items-center justify-center gap-3 py-3 px-6 font-medium text-white border border-gray-400 rounded-sm shadow-lg bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 transition-all duration-300">
                   <span className="uppercase tracking-wide">Referral Link</span>
 

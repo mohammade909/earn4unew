@@ -24,6 +24,7 @@ import otpReducer from "./otpSlice";
 import achivesReducer from "./achiversSlice";
 import forgotReducer from "./forgotSlice";
 import ctoReducer from "./ctoSlice";
+import offerReducer from "./offer";
 
 const rootReducer = combineReducers({
   auth: authReducer, 
@@ -46,6 +47,7 @@ const rootReducer = combineReducers({
   achivers:achivesReducer,
   forgot:forgotReducer,
   cto:ctoReducer,
+  offers:offerReducer
 });
 
 const persistConfig = {

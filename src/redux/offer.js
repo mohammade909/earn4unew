@@ -1,16 +1,20 @@
 // usersSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-export const addNews = createAsyncThunk(
-  "staff/addNews",
-  async ({ values }, thunkAPI) => {
+
+export const createOffer = createAsyncThunk(
+  "offer/create",
+  async (values, thunkAPI) => {
     try {
-      const response = await fetch(`https://api.earn4u.info/api/v1//news/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        `https://api.earn4u.info/api/v1/offers/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -18,6 +22,8 @@ export const addNews = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data);
+      
 
       return data;
     } catch (error) {
@@ -27,11 +33,11 @@ export const addNews = createAsyncThunk(
   }
 );
 
-export const getAllNews = createAsyncThunk(
-  "staff/getAllNews",
+export const fetchOffers = createAsyncThunk(
+  "offer/fetchOffers",
   async (_, thunkAPI) => {
     try {
-      const response = await fetch("https://api.earn4u.info/api/v1//news/list");
+      const response = await fetch("https://api.earn4u.info/api/v1/offers");
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -47,11 +53,13 @@ export const getAllNews = createAsyncThunk(
   }
 );
 
-export const getNews = createAsyncThunk(
-  "staff/getNews",
+export const fecthUserOffers = createAsyncThunk(
+  "offer/fecthUserOffers",
   async (id, thunkAPI) => {
     try {
-      const response = await fetch(`https://api.earn4u.info/api/v1//news/${id}`);
+      const response = await fetch(
+        `https://api.earn4u.info/api/v1/offers/user/${id}`
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -66,39 +74,47 @@ export const getNews = createAsyncThunk(
     }
   }
 );
-export const deleteNews = createAsyncThunk(
-  "staff/deleteNews",
+export const deleteOffer = createAsyncThunk(
+  "offer/deleteOffer",
   async (id, thunkAPI) => {
     try {
       // Your asynchronous logic to delete student here
-      const response = await fetch(`https://api.earn4u.info/api/v1//news/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://api.earn4u.info/api/v1/offers/delete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
       const data = await response.json();
-      return { Id: id, message: data.message };
+      console.log(data);
+      
+      return id;
     } catch (error) {
       // Handle error
       return thunkAPI.rejectWithValue({ error: error.message });
     }
   }
 );
-export const updateNews = createAsyncThunk(
-  "student/updateNews",
+export const updateOffer = createAsyncThunk(
+  "student/updateOffer",
   async ({ id, updatedData }, thunkAPI) => {
     try {
       // Your asynchronous logic to update student here
-      const response = await fetch(`https://api.earn4u.info/api/v1//news/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-      });
+      const response = await fetch(
+        `https://api.earn4u.info/api/v1/offers/update/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -116,99 +132,97 @@ export const updateNews = createAsyncThunk(
 );
 
 const initialState = {
-  allnews:null,
-  singlenews:null,
+  offers: [],
+  offer: null,
+  userOffers: [],
   loading: false,
   error: null,
   message: null,
 };
 
-const newslice = createSlice({
-  name: "allnews",
+const offerSlice = createSlice({
+  name: "offers",
   initialState,
   reducers: {
-    clearErrors: (state) => {
+    resetState: (state) => {
       state.error = null;
-    },
-    clearMessage: (state) => {
       state.message = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllNews.pending, (state) => {
+      .addCase(fetchOffers.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getAllNews.fulfilled, (state, action) => {
+      .addCase(fetchOffers.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.allnews = action.payload.allnews;
+        state.offers = action.payload;
       })
-      .addCase(getAllNews.rejected, (state, action) => {
+      .addCase(fetchOffers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.error;
       })
-      .addCase(getNews.pending, (state) => {
+      .addCase(fecthUserOffers.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getNews.fulfilled, (state, action) => {
+      .addCase(fecthUserOffers.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.singlenews = action.payload.singlenews;
+        state.offers = action.payload;
       })
-      .addCase(getNews.rejected, (state, action) => {
+      .addCase(fecthUserOffers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.error;
       })
-      .addCase(deleteNews.pending, (state) => {
+      .addCase(deleteOffer.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(deleteNews.fulfilled, (state, action) => {
+      .addCase(deleteOffer.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.message = action.payload.message;
-        state.allnews = state.allnews.filter(
-          (u) => u.id !== action.payload.Id
+        state.message = "Offer has been deleted";
+        state.offers = state.offers.filter(
+          (off) => off.offer_id !== action.payload
         );
       })
-      .addCase(deleteNews.rejected, (state, action) => {
+      .addCase(deleteOffer.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.error;
       })
-      .addCase(updateNews.pending, (state) => {
+      .addCase(updateOffer.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(updateNews.fulfilled, (state, action) => {
+      .addCase(updateOffer.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.message = action.payload.message;
+        state.message = "update offer successfully";
       })
-      .addCase(updateNews.rejected, (state, action) => {
+      .addCase(updateOffer.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.error;
       })
 
-      .addCase(addNews.pending, (state) => {
+      .addCase(createOffer.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(addNews.fulfilled, (state, action) => {
+      .addCase(createOffer.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.message = action.payload.message;
+        state.message = "Offer has been created successfully";
       })
-      .addCase(addNews.rejected, (state, action) => {
+      .addCase(createOffer.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.error;
-      })
+      });
   },
 });
 
-export const { clearErrors, clearMessage } = newslice.actions;
+export const { resetState } = offerSlice.actions;
 
-export default newslice.reducer;
-
+export default offerSlice.reducer;

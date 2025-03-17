@@ -103,12 +103,20 @@ export default function UserAddWithdrawal() {
       );
       return;
     }
+    if (checkpending>0) {
+      alert(
+        "pending Withdrawals already present"
+      );
+      return;
+    }
     if (singleuser?.bep20 || singleuser?.trc20) {
       setWithdrawalROIModel(true);
     } else {
       setBebModal(true);
     }
   }
+
+  const checkpending=singleWithdrawal?.filter((item)=>item.status =="pending").length
   return (
     <>
       {message && <SuccessAlert message={message} />}

@@ -64,6 +64,8 @@ import AdminAchiver from "./Admin/AdminAchiver";
 import ForgotPassword from "./BaseFile/Pages/ForgotPassword";
 import AdminCto from "./Admin/AdminCto";
 import DefaulterUsers from "./Admin/DefaulterUsers";
+import OfferForm from "./Admin/OfferForm";
+import OffersListComponent from "./Admin/Offers";
 
 function App() {
   
@@ -89,6 +91,11 @@ function App() {
         <Route path="/admin/activation/plan" element={ <AdminMenu Children={<AdminActPlan/>} PageName={"Activation Plan"}/>}/>
         <Route path="/admin/user/:action" element={ <AdminMenu Children={<AdminUserList/>} PageName={"User"}/>}/>
         <Route path="/admin/support" element={ <AdminMenu Children={<AdminSupport/>} PageName={"Support"}/>}/>
+
+        
+        <Route path="/admin/offer-form" element={ <AdminMenu Children={<OfferForm/>} PageName={"Offer-form"}/>}/>
+        <Route path="/admin/offers" element={ <AdminMenu Children={<OffersListComponent/>} PageName={"Offers"}/>}/> 
+
         <Route path="/admin/level" element={ <AdminMenu Children={<AdminLevel/>} PageName={"Level"}/>}/>
         <Route path="/admin/pendingwithdrawalrequest" element={ <AdminMenu Children={<AdminPendingWidhdrawalRequest/>} PageName={"Pending Withdrawal Request"}/>}/>
         <Route path="/admin/pendingwithdrawalrequest/:action" element={ <AdminMenu Children={<AdminPendingWidhdrawalRequest/>} PageName={"Pending Withdrawal Request"}/>}/>

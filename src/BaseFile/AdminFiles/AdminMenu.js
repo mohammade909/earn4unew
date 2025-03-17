@@ -21,6 +21,7 @@ import {
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import {BadgePercent, UserX} from 'lucide-react'
 
 const Management = [
   { name: "Unblocked Users", to: "/admin/user/unblock", current: true },
@@ -61,19 +62,22 @@ const MainMenu = [
     submenu: [],
   },
   {
+   
     name: "Reports",
     to: "/admin/reports",
-    icon: CalendarIcon,
+    icon: BadgePercent,
     current: false,
     submenu: [],
   },
   {
     name: "Defaulter",
     to: "/admin/defaulter",
-    icon: CalendarIcon,
+    icon: UserX,
     current: false,
     submenu: [],
   },
+
+
   {
     name: "Support",
     to: "/admin/support",
@@ -104,6 +108,13 @@ const submenu = [
     current: false,
     submenu: [],
   },
+  // {
+  //   name: "Offers",
+  //   to: "/admin/offers",
+  //   icon: BadgePercent,
+  //   current: false,
+  //   submenu: [],
+  // },
   {
     name: "Defaulter",
     to: "/admin/defaulter",
